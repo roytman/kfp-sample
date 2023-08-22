@@ -3,8 +3,8 @@ import kfp.dsl as dsl
 from kfp_tekton.compiler import TektonCompiler
 
 # components
-start_op = comp.load_component_from_file("../components/startRayComponent.yaml")
-stop_op = comp.load_component_from_file("../components/stopRayComponent.yaml")
+start_op = comp.load_component_from_file("../components/startComponent.yaml")
+stop_op = comp.load_component_from_file("../components/stopComponent.yaml")
 
 
 @dsl.pipeline(
