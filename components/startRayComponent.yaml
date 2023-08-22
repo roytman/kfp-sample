@@ -1,0 +1,26 @@
+name: Start Ray Cluster
+description: Starts Ray cluster
+
+inputs:
+    - { name: name, type: String }
+    - { name: delay, type: Integer }
+outputs:
+    - { name: output, type: String }
+
+implementation:
+    container:
+        image: docker.io/roytman/ray-operations:0.0.1
+        # command is a list of strings (command-line arguments).
+        # The YAML language has two syntaxes for lists and you can use either of them.
+        # Here we use the "flow syntax" - comma-separated strings inside square brackets.
+        command: [
+                python,
+                # Path of the program inside the container
+                /pipelines/component/src/start-ray-cluster.py,
+                --name,
+                { inputValue: name },
+                --delay,
+                { inputValue: delay },
+                --output_path,
+                { outputPath: output },
+            ]
