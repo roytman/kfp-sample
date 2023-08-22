@@ -10,7 +10,7 @@ stop_op = comp.load_component_from_file("../components/stopComponent.yaml")
 @dsl.pipeline(
     name="sample-pipeline",
 )
-def sample_ray_pipeline(
+def sample_pipeline(
     name: str = "ktp-test",
     delay: int = 6, 
 ):
@@ -34,4 +34,4 @@ def sample_ray_pipeline(
 
 if __name__ == "__main__":
     # Compiling the pipeline
-    TektonCompiler().compile(sample_ray_pipeline, __file__.replace(".py", ".yaml"))
+    TektonCompiler().compile(sample_pipeline, __file__.replace(".py", ".yaml"))

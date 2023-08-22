@@ -1,19 +1,19 @@
-name: Stop Ray Cluster
-description: Cleans and shutdowns the Ray cluster
+name: Stop component name
+description: Stop component name
 
 inputs:
-    - { name: name, type: String, description: "Ray cluster name" }
+    - { name: name, type: String }
 
 implementation:
     container:
-        image: docker.io/roytman/ray-operations:0.0.1
+        image: docker.io/roytman/kfp-oc:0.0.1
         # command is a list of strings (command-line arguments).
         # The YAML language has two syntaxes for lists and you can use either of them.
         # Here we use the "flow syntax" - comma-separated strings inside square brackets.
         command: [
                 python,
                 # Path of the program inside the container
-                /pipelines/component/src/stop-ray-cluster.py,
+                /pipelines/component/src/stop-component.py,
                 --name,
                 { inputValue: name },
             ]
