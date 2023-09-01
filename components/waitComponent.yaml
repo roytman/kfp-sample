@@ -1,9 +1,9 @@
-name: Start component
-description: Start component
+name: Wait component
+description: Wait component 
 
 inputs:
-    - { name: name, type: String }
-    
+    - { name: delay, type: Integer }
+
 implementation:
     container:
         image: docker.io/roytman/kfp-oc:0.0.1
@@ -13,7 +13,7 @@ implementation:
         command: [
                 python,
                 # Path of the program inside the container
-                /pipelines/component/src/start-component.py,
-                --name,
-                { inputValue: name },
+                /pipelines/component/src/wait-component.py,
+                --delay,
+                { inputValue: delay },
             ]

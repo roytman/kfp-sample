@@ -1,7 +1,6 @@
 # execute start Ray cluster
 def start(
     name: str,  # name of Ray cluster
-    delay: int,  # delay
 ) -> str:
     # Import pieces from codeflare-sdk
     import os
@@ -31,7 +30,7 @@ def start(
         print(f"Failed to log into openshift cluster, error {e}. Please check token/server values provided")
         sys.exit(1)
     print("successfully logged in")
-    
+
    
     # Create and configure our cluster object (and appwrapper)
     cluster = Cluster(
@@ -69,21 +68,15 @@ def start(
         print(f"Failed to init Ray cluster, error {e}")
         sys.exit(1)
 
-    print(f"{name}: before delay of {delay} sec")
-    time.sleep(delay)
-    print(f"{name}: after delay of {delay} sec")
-
 
 if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description="Start component")
     parser.add_argument("-n", "--name", type=str, default="my-test-cluster")
-    parser.add_argument("-d", "--delay", default=5, type=int)
 
     args = parser.parse_args()
 
     start(
         name=args.name,
-        delay=args.delay,
     )

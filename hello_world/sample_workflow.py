@@ -5,6 +5,7 @@ from kubernetes import client as k8s_client
 
 # components
 start_op = comp.load_component_from_file("../components/startComponent.yaml")
+wait_op = comp.load_component_from_file("../components/waitComponent.yaml")
 stop_op = comp.load_component_from_file("../components/stopComponent.yaml")
 
 
@@ -13,7 +14,7 @@ stop_op = comp.load_component_from_file("../components/stopComponent.yaml")
 )
 def sample_pipeline(
     name: str = "kfp-test",
-    delay: int = 6, 
+    delay: int = 10, 
 ):
 
     clean_up_task = stop_op(name=name)
@@ -29,10 +30,7 @@ def sample_pipeline(
 
     with dsl.ExitHandler(clean_up_task):
         # invoke pipeline
-        start = start_op(
-            name=name,
-            delay=delay,
-        )
+        start = start_op(name=name)
         # No cashing
         start.execution_options.caching_strategy.max_cache_staleness = "P0D"
         # image pull policy
@@ -46,6 +44,8 @@ def sample_pipeline(
                 ),
             )
         )
+
+        wait = wait_op(delay=delay).after(start)
 
 if __name__ == "__main__":
     # Compiling the pipeline
