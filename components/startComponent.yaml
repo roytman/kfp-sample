@@ -4,8 +4,6 @@ description: Start component name
 inputs:
     - { name: name, type: String }
     - { name: delay, type: Integer }
-outputs:
-    - { name: output, type: String }
 
 implementation:
     container:
@@ -21,6 +19,4 @@ implementation:
                 { inputValue: name },
                 --delay,
                 { inputValue: delay },
-                --output_path,
-                { outputPath: output },
             ]
