@@ -6,4 +6,3 @@ RUN pip install --upgrade pip && pip install codeflare-sdk==v0.6.1
 RUN pip install "pydantic<2" 
 RUN pip install "ray[default]"==2.6.3
 
-COPY ./src /pipelines/component/src
